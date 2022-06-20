@@ -1,0 +1,42 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2022-06-20T22:12:36+00:00",
+    "name": "FoundryVTT",
+    "author": "shivumkumar1@gmail.com",
+    "description": null,
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/kshivum\/my-pterodactyl-eggs-foundry:latest": "ghcr.io\/kshivum\/my-pterodactyl-eggs-foundry:latest"
+    },
+    "file_denylist": [],
+    "startup": "node FoundryVTTFiles\/resources\/app\/main.js --dataPath=FoundryVTTData",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Server started\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n\r\napt install -y curl\r\n\r\nmkdir \/mnt\/server\/FoundryVTTFiles\r\nmkdir \/mnt\/server\/FoundryVTTData\r\ncd \/mnt\/server\/FoundryVTTFiles\r\n\r\n#curl -o foundry.zip \"${FOUNDRYURL}\"\r\nwget -O foundry.zip \"${FOUNDRYURL}\"\r\n\r\nunzip foundry.zip\r\nrm foundry.zip",
+            "container": "ghcr.io\/pterodactyl\/installers:alpine",
+            "entrypoint": "\/bin\/ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "FoundryVTT Temporary Download Link",
+            "description": "This will be used to download the Foundry Server",
+            "env_variable": "foundryURL",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|url",
+            "field_type": "text"
+        }
+    ]
+}
